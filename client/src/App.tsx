@@ -1,8 +1,23 @@
 import React from "react";
-import "./App.css";
+import { ThemeProvider, CssBaseline, createMuiTheme } from "@material-ui/core";
+import { indigo, blueGrey } from "@material-ui/core/colors";
 
-function App() {
-  return <div className="App"></div>;
-}
+const defaultTheme = createMuiTheme({
+  palette: {
+    type: "dark",
+    primary: indigo,
+    secondary: blueGrey
+  }
+});
+
+const App = () => {
+  return (
+    <div className="App">
+      <ThemeProvider theme={defaultTheme}>
+        <CssBaseline />
+      </ThemeProvider>
+    </div>
+  );
+};
 
 export default App;
