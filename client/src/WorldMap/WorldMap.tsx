@@ -1,4 +1,4 @@
-import React, { useState, createRef } from "react";
+import React, { useState, createRef, useEffect } from "react";
 import { Map, TileLayer } from "react-leaflet";
 import { makeStyles } from "@material-ui/core";
 import { useParams, useHistory } from "react-router";
@@ -25,10 +25,25 @@ export const WorldMap = () => {
   const history = useHistory();
   const { lat, lng, zoom } = useParams();
   const [mapPos, setMapPos] = useState<IMapData>({
-    lat: lat ? parseFloat(lat) : 51.505,
-    lng: lng ? parseFloat(lng) : -0.09,
-    zoom: zoom ? parseFloat(zoom) : 13
+    lat: 51.505,
+    lng: -0.09,
+    zoom: 13
   });
+
+  useEffect(() => {
+    if (!lat || !lng || !zoom) return;
+    let newLat = 51.505;
+    let newLng = -0.09;
+    let newZoom = 13;
+    if (!isNaN(parseFloat(lat))) newLat = parseFloat(lat);
+    if (!isNaN(parseFloat(lng))) newLat = parseFloat(lng);
+    if (!isNaN(parseFloat(zoom))) newLat = parseFloat(zoom);
+    setMapPos({
+      lat: newLat,
+      lng: newLng,
+      zoom: newZoom
+    });
+  }, []);
 
   const moveEnd = (event: LeafletEvent) => {
     if (mapRef.current) {

@@ -10,7 +10,7 @@ import { Switch, Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import { NavBar } from "./NavBar";
 import { WorldMap } from "./WorldMap/WorldMap";
-import { Jumbotron } from "./Jumbotron/Jumbotron";
+import { Stats } from "./Stats/Stats";
 
 const defaultTheme = createMuiTheme({
   palette: {
@@ -36,17 +36,17 @@ const App = () => {
       <ThemeProvider theme={defaultTheme}>
         <BrowserRouter>
           <CssBaseline />
-          <Switch>
-            <Route exact path="/:lat?/:lng?/:zoom?">
-              <div className={classes.container}>
-                <NavBar />
+          <div className={classes.container}>
+            <NavBar />
+            <Switch>
+              <Route exact path="/stats">
+                <Stats />
+              </Route>
+              <Route exact path="/:lat?/:lng?/:zoom?">
                 <WorldMap />
-              </div>
-            </Route>
-            <Route exact path="/stats">
-              <Jumbotron />
-            </Route>
-          </Switch>
+              </Route>
+            </Switch>
+          </div>
         </BrowserRouter>
       </ThemeProvider>
     </div>
