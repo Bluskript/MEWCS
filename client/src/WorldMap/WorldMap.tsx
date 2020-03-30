@@ -2,7 +2,7 @@ import React, { useState, createRef, useEffect } from "react";
 import { Map, TileLayer } from "react-leaflet";
 import { makeStyles } from "@material-ui/core";
 import { useParams, useHistory } from "react-router";
-import { LeafletEvent } from "leaflet";
+import L, { LeafletEvent } from "leaflet";
 
 interface IMapData {
   lat: number;
@@ -36,13 +36,21 @@ export const WorldMap = () => {
     let newLng = -0.09;
     let newZoom = 13;
     if (!isNaN(parseFloat(lat))) newLat = parseFloat(lat);
-    if (!isNaN(parseFloat(lng))) newLat = parseFloat(lng);
-    if (!isNaN(parseFloat(zoom))) newLat = parseFloat(zoom);
+    if (!isNaN(parseFloat(lng))) newLng = parseFloat(lng);
+    if (!isNaN(parseFloat(zoom))) newZoom = parseFloat(zoom);
     setMapPos({
       lat: newLat,
       lng: newLng,
       zoom: newZoom
     });
+    if (mapRef.current) {
+      console.log("hi");
+      L.polygon([
+        [51.509, -0.08],
+        [51.503, -0.06],
+        [51.51, -0.047]
+      ]).addTo(mapRef.current.leafletElement);
+    }
   }, []);
 
   const moveEnd = (event: LeafletEvent) => {
