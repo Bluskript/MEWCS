@@ -1,0 +1,4 @@
+server:
+  port: ":1337"
+db:
+  port: ":5432"

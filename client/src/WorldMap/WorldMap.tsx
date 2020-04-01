@@ -31,20 +31,20 @@ export const WorldMap = () => {
   });
 
   useEffect(() => {
-    if (!lat || !lng || !zoom) return;
     let newLat = 51.505;
     let newLng = -0.09;
     let newZoom = 13;
-    if (!isNaN(parseFloat(lat))) newLat = parseFloat(lat);
-    if (!isNaN(parseFloat(lng))) newLng = parseFloat(lng);
-    if (!isNaN(parseFloat(zoom))) newZoom = parseFloat(zoom);
+    if (lat && lng && zoom) {
+      if (!isNaN(parseFloat(lat))) newLat = parseFloat(lat);
+      if (!isNaN(parseFloat(lng))) newLng = parseFloat(lng);
+      if (!isNaN(parseFloat(zoom))) newZoom = parseFloat(zoom);
+    }
     setMapPos({
       lat: newLat,
       lng: newLng,
       zoom: newZoom
     });
     if (mapRef.current) {
-      console.log("hi");
       L.polygon([
         [51.509, -0.08],
         [51.503, -0.06],
