@@ -1,4 +1,8 @@
 server:
   port: ":1337"
 db:
-  port: ":5432"
+  host: "localhost"
+  port: 5432
+  user: "root"
+  password: "root"
+  dbname: "fullscaleearth"

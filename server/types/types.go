@@ -1,15 +1,19 @@
 package types
 
-import "github.com/labstack/echo/v4"
+import (
+	"database/sql"
+	"github.com/labstack/echo/v4"
+)
 
 type EarthServer struct {
-	HTTPServer *echo.Echo
+	Echo   *echo.Echo
+	DB     *sql.DB
 	Config *EarthConfig
 }
 
 type EarthConfig struct {
 	Server ServerConfig
-	DB DBConfig
+	DB     DBConfig
 }
 
 type ServerConfig struct {
@@ -17,5 +21,9 @@ type ServerConfig struct {
 }
 
 type DBConfig struct {
-	Port string
+	Host     string
+	Port     int
+	User     string
+	Password string
+	DBName   string
 }
